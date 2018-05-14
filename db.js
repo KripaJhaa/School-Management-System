@@ -124,5 +124,7 @@ module.exports = {
     Subject,
     Teacher,
     Lecture,
-    Student
+    Student,
+    SubTeachMap,
+    StudentBatchMap
 }

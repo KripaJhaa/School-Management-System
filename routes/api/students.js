@@ -1,7 +1,8 @@
 const route = require('express').Router()
 const path = require('path')
 const Student = require('../../db').Student
-
+const Batch = require('../../db').Batch
+const StudentBatchMap = require('../../db').StudentBatchMap
 
 
 
@@ -10,8 +11,21 @@ const Student = require('../../db').Student
  * GET requests
  */
 route.get('/:id/batches', (req, res) => {
+    let url=req.path;
+    let arr=url.split('/');
+    //odd place index will give ids
 
-    res.status(200).json({})
+    const sId=arr[1]
+
+    StudentBatchMap.findAll({
+        where:{
+            studentId:sId
+        },
+        
+    }).then((batchIds)=>{
+        res.status(200).json(batchIds)
+    })
+
 })
 
 route.get('/:id', (req, res) => {
@@ -23,10 +37,7 @@ route.get('/', (req, res) => {
     .then((students)=>{
         res.status(200).json(students)
     })
-   
 })
-
-
 
 
 
@@ -37,7 +48,7 @@ route.get('/', (req, res) => {
 // Add new student to the database
 route.post('/', (req, res) => {
     const studentName=req.query.name
-    console.log("<>  "+studentName)
+   
     const obj=new Student({
         name:studentName
     })
@@ -47,6 +58,32 @@ route.post('/', (req, res) => {
         sucess:true
     })
 })
+
+/**
+ * Post request on creating batch
+ */
+//Adding Batch
+
+route.post('/:id/batches/:bId', (req, res) => {
+    let url=req.path;
+    let arr=url.split('/');
+    //odd place index will give ids
+    //inserting Batch Table
+    const sId=arr[1]
+    const bId=arr[3]
+
+     const obj= new StudentBatchMap({
+         batchId:bId,
+         studentId:sId
+     })   
+
+     obj.save()
+
+    console.log(arr)
+  
+    res.status(200).json({done:true})
+})
+
 
 /**
  * PUT requests
