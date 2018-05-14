@@ -2,6 +2,7 @@ const route = require('express').Router()
 const path = require('path')
 const Course = require('../../db').Course
 const Batch = require('../../db').Batch
+const Lecture = require('../../db').Lecture
 
 
 route.get('/:id/batches/:Bid/students', (req, res) => {
@@ -13,9 +14,27 @@ route.get('/:id/batches/:Bid/teachers', (req, res) => {
     res.status(200).json({})
 })
 
+route.get('/:id/batches/:BId/lectures', (req, res) => {
+
+    const bId=req.params.BId
+    Lecture.findAll({
+        where:{
+            batchId:parseInt(bId)
+        }
+    }).then((lecture)=>{
+        res.status(200).json(lecture)
+    })
+})
+
 route.get('/:id/batches/:BId/lectures/:Lid', (req, res) => {
 
-    res.status(200).json({})
+    Lecture.findAll({
+        where:{
+            id:req.params.Lid
+        }
+    }).then((lecture)=>{
+        res.status(200).json(lecture)
+    })
 })
 
 route.get('/:id/batches/:Bid', (req, res) => {
@@ -121,6 +140,31 @@ route.post('/:id/batches', (req, res) => {
 
     
     res.status(200).json({done:true})
+})
+
+/**
+ * post for lectures  //////////////////
+ */
+
+route.post('/:id/batches/:BId/lectures', (req, res) => {
+    let url=req.path;
+    let arr=url.split('/');
+
+    const lname=req.query.name
+
+    //const cId=req.params.id
+    const bId=req.params.BId
+
+    const obj=new Lecture({
+        batchId:bId,
+        name:lname    
+    })
+    
+    obj.save()
+
+    res.status(200).json({
+        success:true
+    })
 })
 
 

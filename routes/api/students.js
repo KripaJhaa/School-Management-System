@@ -69,8 +69,8 @@ route.post('/:id/batches/:bId', (req, res) => {
     let arr=url.split('/');
     //odd place index will give ids
     //inserting Batch Table
-    const sId=arr[1]
-    const bId=arr[3]
+    const sId=req.params.id
+    const bId=req.params.bId
 
      const obj= new StudentBatchMap({
          batchId:bId,
