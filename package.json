@@ -1,0 +1,17 @@
+{
+  "name": "nodejsassignment",
+  "version": "1.0.0",
+  "description": "for exit test assignment",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "author": "kripa",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.16.3",
+    "sequelize": "^4.37.7",
+    "sqlite3": "^4.0.0"
+  }
+}
