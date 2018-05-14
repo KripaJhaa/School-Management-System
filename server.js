@@ -13,7 +13,7 @@ app.use('/', require('./routes/api').route)
 
 var port = Number(process.env.PORT || 8000);
 
-//app.use('/', express.static(path.join(__dirname, 'public')))
+app.use('/', express.static(path.join(__dirname, 'public')))
 
 var server = app.listen(port, function() {
     console.log('Listening on port %d', server.address().port);
