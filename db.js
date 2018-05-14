@@ -92,6 +92,7 @@ Lecture.belongsTo(Batch)
 Subject.hasMany(SubTeachMap)
 SubTeachMap.belongsTo(Subject)
 Teacher.hasOne(SubTeachMap)
+Lecture.hasOne(SubTeachMap)
 
 // many to many Students:Batches
 Batch.belongsToMany(Student, {
@@ -103,8 +104,7 @@ Student.belongsToMany(Batch, {
     timestamps: false
 })
 //one to one Lecture:Sub-teach-map
-Lecture.belongsTo(SubTeachMap)
-SubTeachMap.hasOne(Lecture)
+
 
 /**
  * Database Sync
