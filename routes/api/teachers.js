@@ -3,7 +3,7 @@ const path = require('path')
 const Teacher = require('../../db').Teacher
 
 route.get('/:id/batches', (req, res) => {
-    res.status(200).json({})
+    res.status(200).json()
 })
 
 

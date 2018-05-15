@@ -87,9 +87,9 @@ route.get('/', (req, res) => {
     Course.findAll({        
     }).then((courses)=>{
 
-        res.status(200).json({
+        res.status(200).json(
             courses
-        })
+        )
 
     })
 
