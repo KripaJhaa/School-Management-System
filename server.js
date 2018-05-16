@@ -7,7 +7,7 @@ app.use(express.urlencoded({extended: true}))
 const path =require('path')
 
 
-
+app.use(cors(corsOptions));
 
 // app.use(function (req, res, next) {
 
