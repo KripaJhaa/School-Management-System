@@ -1,10 +1,25 @@
 
-var express = require('express');
+var express = require('express')
+,cors = require('cors')
 var app = express();
 app.use(express.json())
 app.use(express.urlencoded({extended: true}))
 
 const path =require('path')
+
+var originsWhitelist = [
+    'http://localhost:4200',      //this is my front-end url for development
+     'https://my-school-management.herokuapp.com'
+  ];
+
+
+var corsOptions = {
+    origin: function(origin, callback){
+          var isWhitelisted = originsWhitelist.indexOf(origin) !== -1;
+          callback(null, isWhitelisted);
+    },
+    credentials:true
+  }
 
 
 app.use(cors(corsOptions));
